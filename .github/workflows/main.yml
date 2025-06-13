@@ -86,12 +86,6 @@ jobs:
           name: tdo_kolo2_cicd
           path: tdo_kolo2_cicd.tar
 
-      - name: Download Docker image artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: tdo_kolo2_cicd
-          path: .
-
       - name: Load Docker image
         run: docker load -i tdo_kolo2_cicd.tar
 
@@ -99,7 +93,7 @@ jobs:
         run: |
           echo "Simulating deployment to STAGING environment..."
           docker image ls | grep tdo_kolo2_cicd
-          echo "Staging deployment complete. Waiting for manual approval to continue."
+          echo "Staging deployment complete. Waiting for approval to continue."
 
   deploy-production:
     name: Deploy to Production
