@@ -80,6 +80,12 @@ jobs:
       - name: Save Docker Image to file
         run: docker save ${{ secrets.DOCKER_USERNAME }}/tdo_kolo2_cicd:latest -o tdo_kolo2_cicd.tar
 
+      - name: Upload Docker image as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: tdo_kolo2_cicd
+          path: tdo_kolo2_cicd.tar
+
       - name: Download Docker image artifact
         uses: actions/download-artifact@v4
         with:
