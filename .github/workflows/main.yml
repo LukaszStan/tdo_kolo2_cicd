@@ -1,14 +1,12 @@
-name: CI/Cd Pipeline
+name: CI/CD Pipeline
 
-on:
-  push:
-    branches-ignore:
-      - main
+on: push
 
 jobs:
   test:
     name: Run Unit Tests
     runs-on: ubuntu-latest
+    if: github.ref != 'refs/heads/main'
 
     steps:
       - name: Check repo
@@ -28,6 +26,7 @@ jobs:
   lint:
     name: Lint Code
     runs-on: ubuntu-latest
+    if: github.ref != 'refs/heads/main'
 
     steps:
       - uses: actions/checkout@v4
