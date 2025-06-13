@@ -2,10 +2,10 @@ import js from "@eslint/js";
 import globals from "globals";
 import reactHooks from "eslint-plugin-react-hooks";
 import reactRefresh from "eslint-plugin-react-refresh";
-import { vitest } from "vitest";
 
 export default [
-  { ignores: ["dist"] },
+  { ignores: ["dist", "coverage"] },
+
   {
     files: ["**/*.{js,jsx}"],
     languageOptions: {
@@ -20,7 +20,6 @@ export default [
     plugins: {
       "react-hooks": reactHooks,
       "react-refresh": reactRefresh,
-      vitest: vitest,
     },
     rules: {
       ...js.configs.recommended.rules,
@@ -30,6 +29,20 @@ export default [
         "warn",
         { allowConstantExport: true },
       ],
+    },
+  },
+
+  // konfiguracja dla testow
+  {
+    files: ["**/*.test.jsx"],
+    languageOptions: {
+      globals: {
+        describe: true,
+        it: true,
+        expect: true,
+        beforeEach: true,
+        afterEach: true,
+      },
     },
   },
 ];
